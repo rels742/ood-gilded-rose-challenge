@@ -26,7 +26,7 @@ class Shop {
           }
         }
       }
-      
+
         updateStandardItem() {
           for (let i = 0; i < this.items.length; i++) {
             if(this.items[i].name === "+5 Dexterity Vest" || this.items[i].name === "Elixir of the Mongoose") {
@@ -45,9 +45,39 @@ class Shop {
           }
         }
 
+        // updateAgedBrie() {
+
+        // }
+
+        // updateSulfuras() {
+
+        // }
+
+        updateBackstagePasses() {
+          for (let i = 0; i < this.items.length; i++) {
+            if(this.items[i].name.includes("TAFKAL80ETC")) {
+              this.items[i].sellIn -= 1
+              if (this.items[i].sellIn > 10) {
+                this.items[i].quality += 1
+              } else if 
+              (this.items[i].sellIn < 0) {
+                this.items[i].quality = 0
+              } else if 
+                (this.items[i].sellIn <=5) {
+                  this.items[i].quality += 3
+                } else {
+                  if (this.items[i].sellIn <= 10) {
+                    this.items[i].quality += 2
+                  }
+                }
+            }
+          }
+        }
+        
         updateQuality() {
           this.updateConjured()
           this.updateStandardItem()
+          this.updateBackstagePasses()
           return this.items
         }
       

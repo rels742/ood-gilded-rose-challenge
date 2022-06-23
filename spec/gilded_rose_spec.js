@@ -1,28 +1,28 @@
 var {Shop, Item} = require('../src/gilded_rose.js');
 describe("Gilded Rose", function() {
 
-  it("standard item: sellIn = 0, quality = 0", function() {
-    const gildedRose = new Shop([ new Item("standard item", 0, 0) ]);
+  fit("standard item: sellIn = 0, quality = 0", function() {
+    const gildedRose = new Shop([ new Item("+5 Dexterity Vest" || "Elixir of the Mongoose", 0, 0) ]);
     const items = gildedRose.updateQuality();
-    expect(items[0].name).toEqual("standard item");
+    expect(items[0].name).toEqual("+5 Dexterity Vest" || "Elixir of the Mongoose");
     expect(items[0].sellIn).toEqual(-1);
     expect(items[0].quality).toEqual(0);
   });
 
-  it("standard item: sellIn = 1, quality = 3", function() {
-    const gildedRose = new Shop([ new Item("standard item", 1, 3) ]);
+  fit("standard item: sellIn = 1, quality = 3", function() {
+    const gildedRose = new Shop([ new Item("+5 Dexterity Vest" || "Elixir of the Mongoose", 1, 3) ]);
     const items = gildedRose.updateQuality();
-    expect(items[0].name).toEqual("standard item");
+    expect(items[0].name).toEqual("+5 Dexterity Vest" || "Elixir of the Mongoose");
     expect(items[0].sellIn).toEqual(0);
     expect(items[0].quality).toEqual(2);
   });
 
   // see if there are any special cases for a standard item and test them.
 
-  it("standard item: sellIn = 0, quality = 3", function() {
-    const gildedRose = new Shop([ new Item("standard item", 0, 3) ]);
+  fit("standard item: sellIn = 0, quality = 3", function() {
+    const gildedRose = new Shop([ new Item("+5 Dexterity Vest" || "Elixir of the Mongoose", 0, 3) ]);
     const items = gildedRose.updateQuality();
-    expect(items[0].name).toEqual("standard item");
+    expect(items[0].name).toEqual("+5 Dexterity Vest" || "Elixir of the Mongoose");
     expect(items[0].sellIn).toEqual(-1);
     expect(items[0].quality).toEqual(1);
   });
@@ -112,7 +112,7 @@ describe("Gilded Rose", function() {
 
   // after writing tests for all current items, write tests for Conjured Mana Cake.
 
-  it("Conjured Mana Cake: sellIn = 5, quality = 30", function() {
+  it("Conjured Mana Cake: sellIn = 5, quality = 30. Degrate twice as fast as normal items", function() {
     const gildedRose = new Shop([ new Item("Conjured Mana Cake", 5, 30) ]);
     const items = gildedRose.updateQuality();
     expect(items[0].name).toEqual("Conjured Mana Cake");
@@ -120,7 +120,7 @@ describe("Gilded Rose", function() {
     expect(items[0].quality).toEqual(28);
   });
 
-  it("Conjured Mana Cake: sellIn = 0, quality = 50", function() {
+  it("Conjured Mana Cake: sellIn = 0, quality = 50. After sell in degrates twice as fast as normal so 4 times", function() {
     const gildedRose = new Shop([ new Item("Conjured Mana Cake", 0, 50) ]);
     const items = gildedRose.updateQuality();
     expect(items[0].name).toEqual("Conjured Mana Cake");

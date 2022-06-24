@@ -1,11 +1,3 @@
-class Item {
-  constructor(name, sellIn, quality) {
-    this.name = name
-    this.sellIn = sellIn
-    this.quality = quality
-  }
-}
-
 class Shop {
   constructor(items = []) {
     this.items = items
@@ -100,7 +92,4 @@ class Shop {
   }
 }
 
-module.exports = {
-  Item,
-  Shop
-}
+module.exports = Shop

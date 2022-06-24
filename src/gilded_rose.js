@@ -12,63 +12,76 @@ class Shop {
   }
 
   updateConjured(item) {
-    item.sellIn -= 1
+    if (item.name.includes('Conjured')) {
+      item.sellIn -= 1
 
-    if (item.sellIn < 0) {
-      item.quality -= 4
-    } else {
-      item.quality -= 2
+      if (item.sellIn < 0) {
+        item.quality -= 4
+      } else {
+        item.quality -= 2
+      }
+
+      if (item.quality < 0) {
+        item.quality = 0
+      }
     }
+  }
 
-    if (item.quality < 0) {
-      item.quality = 0
+  updateStandardItem(item) {
+    if (
+      item.name === '+5 Dexterity Vest' ||
+      item.name === 'Elixir of the Mongoose'
+    ) {
+      item.sellIn -= 1
+
+      if (item.sellIn < 0) {
+        item.quality -= 2
+      } else {
+        item.quality -= 1
+      }
+
+      if (item.quality < 0) {
+        item.quality = 0
+      }
     }
   }
 
   updateSulfuras(item) {
-    //Do nothing
-  }
-
-  updateStandardItem(item) {
-    item.sellIn -= 1
-
-    if (item.sellIn < 0) {
-      item.quality -= 2
-    } else {
-      item.quality -= 1
-    }
-
-    if (item.quality < 0) {
-      item.quality = 0
+    if (item.name.includes('Sulfuras')) {
+      // Do nothing
     }
   }
 
   updateAgedBrie(item) {
-    item.sellIn -= 1
+    if (item.name === 'Aged Brie') {
+      item.sellIn -= 1
 
-    if (item.sellIn < 0) {
-      item.quality += 2
-    } else {
-      item.quality += 1
-    }
+      if (item.sellIn < 0) {
+        item.quality += 2
+      } else {
+        item.quality += 1
+      }
 
-    if (item.quality > 50) {
-      item.quality = 50
+      if (item.quality > 50) {
+        item.quality = 50
+      }
     }
   }
 
   updateBackstagePasses(item) {
-    item.sellIn -= 1
+    if (item.name.includes('Backstage passes')) {
+      item.sellIn -= 1
 
-    if (item.sellIn > 10) {
-      item.quality += 1
-    } else if (item.sellIn < 0) {
-      item.quality = 0
-    } else if (item.sellIn <= 5) {
-      item.quality += 3
-    } else {
-      if (item.sellIn <= 10) {
-        item.quality += 2
+      if (item.sellIn > 10) {
+        item.quality += 1
+      } else if (item.sellIn < 0) {
+        item.quality = 0
+      } else if (item.sellIn <= 5) {
+        item.quality += 3
+      } else {
+        if (item.sellIn <= 10) {
+          item.quality += 2
+        }
       }
     }
   }
@@ -77,18 +90,11 @@ class Shop {
     for (let i = 0; i < this.items.length; i++) {
       const currentItem = this.items[i]
 
-      if (currentItem.name === 'Aged Brie') {
-        this.updateAgedBrie(currentItem)
-      } else if (currentItem.name.includes('Conjured')) {
-        this.updateConjured(currentItem)
-      } else if (currentItem.name.includes('Backstage passes')) {
-        this.updateBackstagePasses(currentItem)
-      } else if (currentItem.name.includes('Sulfuras')) {
-        // do nothing
-        this.updateSulfuras(currentItem)
-      } else {
-        this.updateStandardItem(currentItem)
-      }
+      this.updateAgedBrie(currentItem)
+      this.updateConjured(currentItem)
+      this.updateBackstagePasses(currentItem)
+      this.updateSulfuras(currentItem)
+      this.updateStandardItem(currentItem)
     }
     return this.items
   }
